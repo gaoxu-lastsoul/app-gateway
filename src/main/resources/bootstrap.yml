@@ -1,0 +1,19 @@
+server:
+  port: 8889
+spring:
+  application:
+    name: app-gateway
+  profiles:
+      active: dev
+  cloud:
+    gateway:
+      routes:
+        - id: appPush-service
+          uri: http://localhost:8081/
+          predicates:
+            - Path=/appPush/**
+    sentinel:
+      eager: true
+      transport:
+        dashboard: localhost:9999
+        port: 9999
